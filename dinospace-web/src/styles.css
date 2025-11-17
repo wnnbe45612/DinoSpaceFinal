@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+/* Fondo oscuro global para DinoSpace */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #141f25 !important;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #141f25 !important;
+}

@@ -1,0 +1,54 @@
+<div class="test-container">
+    <!-- Encabezado fuera de la tarjeta -->
+    <div class="header-section">
+        <div class="header-content">
+            <h1 class="main-title">DINOSPACE</h1>
+            <p class="subtitle">TU SITIO DE APOYO EMOCIONAL</p>
+        </div>
+        <div class="header-image">
+            <img src="assets/images/dino_space1.png" alt="DinoSpace Logo" />
+        </div>
+    </div>
+
+    <!-- Tarjeta principal -->
+    <div class="card">
+        <!-- Contenido del formulario -->
+        <div class="form-content">
+            <div class="form-step">
+                <h2 class="login-title">Iniciar Sesión</h2>
+
+                <!-- Mensaje de error -->
+                <div *ngIf="errorMessage" class="error-message login-error">
+                    {{ errorMessage }}
+                </div>
+
+                <form (ngSubmit)="login()" #loginForm="ngForm">
+                    <label>Correo electrónico</label>
+                    <input type="email" [(ngModel)]="email" name="email" placeholder="Ingresa tu correo electrónico"
+                        required (input)="onInputChange()" [class.error]="errorMessage">
+
+                    <label>Contraseña</label>
+                    <input type="password" [(ngModel)]="password" name="password" placeholder="Ingresa tu contraseña"
+                        required (input)="onInputChange()" [class.error]="errorMessage">
+
+                    <!-- Botones -->
+                    <div class="buttons">
+                        <button type="button" (click)="goToHome()" class="btn-back">
+                            ← Volver al inicio
+                        </button>
+
+                        <button type="submit" class="btn-next" [disabled]="isLoading">
+                            <span *ngIf="!isLoading">Ingresar →</span>
+                            <span *ngIf="isLoading">Cargando...</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Enlace de registro -->
+                <div class="register-link">
+                    <p>¿No tienes cuenta? <a routerLink="/register">Regístrate aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

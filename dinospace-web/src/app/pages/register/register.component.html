@@ -1,0 +1,169 @@
+<div class="test-container">
+    <!-- Encabezado fuera de la tarjeta -->
+    <div class="header-section">
+        <div class="header-content">
+            <h1 class="main-title">DINOSPACE</h1>
+            <p class="subtitle">TU SITIO DE APOYO EMOCIONAL</p>
+        </div>
+        <div class="header-image">
+            <img src="assets/images/dino_space2.png" alt="DinoSpace Ilustración" />
+        </div>
+    </div>
+
+    <!-- Tarjeta principal -->
+    <div class="card">
+        <!-- Barra de progreso -->
+        <div class="progress-section">
+            <div class="step-indicator">Progreso: {{ step }} de 8</div>
+            <div class="progress-container">
+                <div class="progress-bar" [style.width.%]="progressPercentage"></div>
+            </div>
+            <div class="progress-percentage">
+                {{ progressPercentage.toFixed(0) }}%
+            </div>
+        </div>
+
+        <!-- Contenido del formulario -->
+        <div class="form-content">
+            <!-- Paso 1 -->
+            <div *ngIf="step === 1" class="form-step">
+                <label>¿Cuál es tu nombre completo?</label>
+                <input [(ngModel)]="formData.nombre" name="nombre" placeholder="Tu nombre completo"
+                    (keypress)="onlyLetters($event)" (paste)="onPaste($event)" (input)="onFieldChange('nombre')"
+                    [class.error]="errors.nombre" />
+                <span class="error-message" *ngIf="errors.nombre">{{ errors.nombre }}</span>
+
+                <label>¿Cuál es tu edad?</label>
+                <input [(ngModel)]="formData.edad" name="edad" type="number" placeholder="Edad" min="17" max="65"
+                    (input)="onFieldChange('edad')" [class.error]="errors.edad" />
+                <span class="error-message" *ngIf="errors.edad">{{ errors.edad }}</span>
+
+                <label>¿Cuál es tu género?</label>
+                <select [(ngModel)]="formData.genero" name="genero" (change)="onFieldChange('genero')"
+                    [class.error]="errors.genero">
+                    <option value="">Selecciona</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <span class="error-message" *ngIf="errors.genero">{{ errors.genero }}</span>
+            </div>
+
+            <!-- Paso 2 -->
+            <div *ngIf="step === 2" class="form-step">
+                <label>¿Cuál es tu correo electrónico?</label>
+                <input [(ngModel)]="formData.correo" name="correo" type="email" placeholder="Correo electrónico"
+                    (input)="onFieldChange('correo')" [class.error]="errors.correo" />
+                <span class="error-message" *ngIf="errors.correo">{{ errors.correo }}</span>
+            </div>
+
+            <!-- Paso 3 -->
+            <div *ngIf="step === 3" class="form-step">
+                <label>¿En qué ciclo estás actualmente?</label>
+                <select [(ngModel)]="formData.ciclo" name="ciclo" (change)="onFieldChange('ciclo')"
+                    [class.error]="errors.ciclo">
+                    <option value="">Selecciona</option>
+                    <option value="1er">1er</option>
+                    <option value="2do">2do</option>
+                    <option value="3ro">3ro</option>
+                    <option value="4to">4to</option>
+                    <option value="5to a más">5to a más</option>
+                </select>
+                <span class="error-message" *ngIf="errors.ciclo">{{ errors.ciclo }}</span>
+            </div>
+
+            <!-- Paso 4 -->
+            <div *ngIf="step === 4" class="form-step">
+                <label>¿Cómo te sientes ahora mismo?</label>
+                <select [(ngModel)]="formData.estadoEmocional" name="estadoEmocional"
+                    (change)="onFieldChange('estadoEmocional')" [class.error]="errors.estadoEmocional">
+                    <option value="">Selecciona</option>
+                    <option value="Estresado">Estresado</option>
+                    <option value="Triste">Triste</option>
+                    <option value="Decepcionado">Decepcionado</option>
+                    <option value="Enojado">Enojado</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <span class="error-message" *ngIf="errors.estadoEmocional">{{ errors.estadoEmocional }}</span>
+            </div>
+
+            <!-- Paso 5 -->
+            <div *ngIf="step === 5" class="form-step">
+                <label>¿Cuántas horas de sueño tienes en promedio?</label>
+                <select [(ngModel)]="formData.horasSueno" name="horasSueno" (change)="onFieldChange('horasSueno')"
+                    [class.error]="errors.horasSueno">
+                    <option value="">Selecciona</option>
+                    <option value="Menos de 5 horas">Menos de 5 horas</option>
+                    <option value="Entre 5 o 6 horas">Entre 5 o 6 horas</option>
+                    <option value="Entre 6 u 8 horas">Entre 6 u 8 horas</option>
+                    <option value="Más de 8 horas">Más de 8 horas</option>
+                </select>
+                <span class="error-message" *ngIf="errors.horasSueno">{{ errors.horasSueno }}</span>
+            </div>
+
+            <!-- Paso 6 -->
+            <div *ngIf="step === 6" class="form-step">
+                <label>¿Practicas alguna actividad de relajación o ejercicio?</label>
+                <select [(ngModel)]="formData.actividad" name="actividad" (change)="onFieldChange('actividad')"
+                    [class.error]="errors.actividad">
+                    <option value="">Selecciona</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+                <span class="error-message" *ngIf="errors.actividad">{{ errors.actividad }}</span>
+            </div>
+
+            <!-- Paso 7 -->
+            <div *ngIf="step === 7" class="form-step">
+                <label>¿Qué tipo de motivación te gustaría recibir?</label>
+                <select [(ngModel)]="formData.motivacion" name="motivacion" (change)="onFieldChange('motivacion')"
+                    [class.error]="errors.motivacion">
+                    <option value="">Selecciona</option>
+                    <option value="Consejos prácticos">Consejos prácticos</option>
+                    <option value="Historias motivadoras">Historias motivadoras</option>
+                    <option value="Técnicas de estudio">Técnicas de estudio</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <span class="error-message" *ngIf="errors.motivacion">{{ errors.motivacion }}</span>
+            </div>
+
+            <!-- Paso 8 -->
+            <div *ngIf="step === 8" class="form-step">
+                <label>Elige una contraseña</label>
+                <input [(ngModel)]="formData.password" name="password" type="password" placeholder="Contraseña"
+                    (input)="onFieldChange('password')" [class.error]="errors.password" />
+                <span class="error-message" *ngIf="errors.password">{{ errors.password }}</span>
+
+                <label>Repite la contraseña</label>
+                <input [(ngModel)]="formData.confirmarPassword" name="confirmarPassword" type="password"
+                    placeholder="Repetir contraseña" (input)="onFieldChange('confirmarPassword')"
+                    [class.error]="errors.confirmarPassword" />
+                <span class="error-message" *ngIf="errors.confirmarPassword">{{ errors.confirmarPassword }}</span>
+            </div>
+        </div>
+
+        <!-- Mensaje final -->
+        <div class="footer-message">
+            <p>
+                Estas respuestas nos ayudarán a personalizar tu experiencia en
+                <b>DINOSPACE</b>.
+            </p>
+        </div>
+        <!-- Botones -->
+        <div class="buttons">
+            <button *ngIf="step === 1" (click)="goToHome()" class="btn-back">
+                ← Volver al inicio
+            </button>
+            <button *ngIf="step > 1" (click)="prevStep()" class="btn-back">
+                ← Atrás
+            </button>
+
+            <button *ngIf="step < 8" (click)="nextStep()" class="btn-next">
+                Siguiente →
+            </button>
+            <button *ngIf="step === 8" (click)="submitForm()" class="btn-submit">
+                Ingresar a DinoSpace
+            </button>
+        </div>
+    </div>
+</div>
